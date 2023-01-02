@@ -13,6 +13,7 @@ function getInput() {
 function dataRequest() {
 $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
 .then(function(currentData) {
+  console.log(currentData);
   // console.log(`
   // Temp: ${Math.round(currentData.main.temp)}°C
   // Wind: ${currentData.wind.speed}mph
@@ -23,7 +24,6 @@ $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}
   $.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&appid=${apiKey}&units=metric`)
   .then(function(forecastData) {
     console.log(forecastData);
-
     var day;
     for (day = 0; day < 40; day++) {
     forecastWrapper.append(`
@@ -36,9 +36,9 @@ $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}
     };
 
   })
-
+  var date = moment.unix(1672686101).format("MM/DD/YYYY");
   currentWrapper.html(`
-  <h2>${city} <img src="${iconUrl + currentData.weather[0].icon + '.png'}" alt="Weather Icon"> </h2>
+  <h2>${city} (${date}) <img src="${iconUrl + currentData.weather[0].icon + '.png'}" alt="Weather Icon"> </h2>
   <p>Temp: ${currentData.main.temp}°C</p>
   <p>Wind: ${currentData.wind.speed}mph</p>
   <p>Humidity: ${currentData.main.humidity}%</p>
