@@ -53,7 +53,7 @@ $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}
     };
 
   })
-  var date = moment.unix(1672686101).format("MM/DD/YYYY");
+  var date = moment.unix(currentData.dt).format("MM/DD/YYYY");
   currentWrapper.html(`
   <h2>${city} (${date}) <img src="${iconUrl + currentData.weather[0].icon + '.png'}" alt="Weather Icon"> </h2>
   <p>Temp: ${currentData.main.temp}°C</p>
