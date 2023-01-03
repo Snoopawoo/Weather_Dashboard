@@ -29,7 +29,6 @@ appendHistory();
 function getInput() {
   city = searchInput.val();
   dataRequest();
-  savetoHistory();
 };
 
 //prints data based on user input
@@ -43,7 +42,7 @@ $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}
     console.log(forecastData);
     var day;
     forecastWrapper.html('');
-    
+    savetoHistory();
     forcastTitle.removeClass( "hide" )
     var currentTime;
     for (day = 0; day < 40; day++) {
@@ -73,7 +72,7 @@ $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}
 
 //adds searches to history
 function savetoHistory() {
-    if (searchHistory.includes(city) || city == ' ' || city == null) {
+    if (searchHistory.includes(city)) {
       return;
     }
     else {
