@@ -18,7 +18,7 @@ function appendHistory() {
   historyWrapper.html('');
   for (var history of searchHistory) {
   historyWrapper.append(`
-  <p>${history}</p>
+  <button class="btn history-button" data-history = '${history}'> ${history} </button>
   `)};
 };
 
@@ -41,6 +41,7 @@ $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}
   .then(function(forecastData) {
     console.log(forecastData);
     var day;
+    forecastWrapper.html('');
     for (day = 0; day < 40; day++) {
     forecastWrapper.append(`
     <h3>${city} <img src="${iconUrl + forecastData.list[day].weather[0].icon + '.png'}" alt="Weather Icon"> </h3>
@@ -64,10 +65,24 @@ $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}
 
 //adds searches to history
 function savetoHistory() {
+    if (searchHistory.includes(city) || city == ' ' || city == null) {
+      return;
+    }
+    else {
     searchHistory.push(city);
-    console.log(searchHistory)
     localStorage.setItem('history', JSON.stringify(searchHistory));
+    };
     appendHistory();
 };
 
 $( "#search-button" ).click(getInput);
+
+//event listener for button press on history buttons
+var historyBtn = document.querySelectorAll('.history-button');
+
+for (i of historyBtn) {
+  i.addEventListener('click', function() {
+    city = (this.dataset.history);
+    dataRequest();
+  });
+}
