@@ -1,3 +1,4 @@
+//declaring variables to be used
 var currentWrapper = $('#today');
 var forcastTitle = $('.forecast-title');
 var forecastWrapper = $('#forecast');
@@ -7,6 +8,8 @@ var city;
 var apiKey = '3899e7379039119a99a2e3d150c2d807';
 var iconUrl = 'https://openweathermap.org/img/w/';
 var searchHistory = [];
+
+//gets saved data from local storage
 searchHistory = JSON.parse(localStorage.getItem('history'));
 
 //makes sure that we don't get an error when we first run the site and get a null from loading local storage
@@ -82,9 +85,10 @@ function savetoHistory() {
     appendHistory();
 };
 
+//adds event listener to search button
 $( "#search-button" ).click(getInput);
 
-//event listener for button press on history buttons
+//addds event listener for button press on history buttons
 var historyBtn = document.querySelectorAll('.history-button');
 
 for (i of historyBtn) {
