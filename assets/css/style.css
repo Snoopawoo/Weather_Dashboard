@@ -2,8 +2,44 @@
     width: 190px;
     margin-top: 10px;
     color: rgb(142, 248, 213);
-    background-color: rgb(48, 45, 45);
+    background-color: #302d2d;
 }
 .history-button:hover {
     color: rgb(69, 145, 119);
+}
+.time{
+    font-size: 25px;
+    color: aquamarine;
+}
+body{
+    background-color: #908a8a;
+}
+.forecast-body{
+    background-color: #575050;
+    color: #6db7a0;
+    margin: 10px;
+}
+.card-body{
+width: 240px;
+}
+.forecast-title{
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid #302d2d;
+}
+.title1{
+    color: aquamarine;
+}
+#today{
+    padding: 0px 10px 0px 10px;
+    border: 1.5px solid #302d2d;
+    border-radius: 5px;
+    background-color: #575050;
+    color: #6db7a0;
+}#today h2{
+    color: aquamarine;
+}
+.hide{
+    display: none;
 }

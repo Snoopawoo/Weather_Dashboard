@@ -1,4 +1,5 @@
 var currentWrapper = $('#today');
+var forcastTitle = $('.forecast-title');
 var forecastWrapper = $('#forecast');
 var historyWrapper = $('#history');
 var searchInput = $('.weather-search');
@@ -42,18 +43,25 @@ $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}
     console.log(forecastData);
     var day;
     forecastWrapper.html('');
+    
+    forcastTitle.removeClass( "hide" )
+    var currentTime;
     for (day = 0; day < 40; day++) {
+    currentTime = moment.unix(forecastData.list[day].dt).format("MMM.DD. hh:mm A");
     forecastWrapper.append(`
-    <h3>${city} <img src="${iconUrl + forecastData.list[day].weather[0].icon + '.png'}" alt="Weather Icon"> </h3>
-    <p>Time: ${forecastData.list[day].dt_txt}</p>
-    <p>Temp: ${forecastData.list[day].main.temp}°C</p>
-    <p>Wind: ${forecastData.list[day].wind.speed}mph</p>
-    <p>Humidity: ${forecastData.list[day].main.humidity}%</p>
+    <div class="card forecast-body" style="width: 18rem;">
+        <div class="card-body">
+          <p class = 'time'>${currentTime} <img src="${iconUrl + forecastData.list[day].weather[0].icon + '.png'}" alt="Weather Icon"> </p>
+          <p>Temp: ${forecastData.list[day].main.temp}°C</p>
+          <p>Wind: ${forecastData.list[day].wind.speed}mph</p>
+          <p>Humidity: ${forecastData.list[day].main.humidity}%</p>
+        </div>
+      </div>
     `);
-    };
-
+    };  
   })
   var date = moment.unix(currentData.dt).format("MM/DD/YYYY");
+  currentWrapper.removeClass( "hide" );
   currentWrapper.html(`
   <h2>${city} (${date}) <img src="${iconUrl + currentData.weather[0].icon + '.png'}" alt="Weather Icon"> </h2>
   <p>Temp: ${currentData.main.temp}°C</p>
